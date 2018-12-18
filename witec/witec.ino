@@ -1,5 +1,6 @@
 #include <Wire.h>
 #include "SSD1306Wire.h"
+#include "image.h"
 
 SSD1306Wire  display(0x3c, 21, 22);
 
@@ -8,6 +9,8 @@ void drawRect();
 void fillRect();
 void drawCircle();
 void printBuffer();
+void drawImage();
+void drawGirl();
 
 void setup()
 {
@@ -40,12 +43,28 @@ void setup()
 
 void loop()
 {
-  // do nothing  
+  display.setTextAlignment(TEXT_ALIGN_LEFT);
+  display.setFont(ArialMT_Plain_16);
+  display.drawString(0, 0, "Am Andres si");
+  display.drawString(0, 16, "OLED OKEEE?!");
+  display.display();
+  delay(1000);
+  display.clear();
+
+  drawImage();
+  display.display();
+  delay(1000);
+  display.clear();
 }
 
 
 
 // Functions******************************************************************************************
+void drawImage()
+{
+  display.drawXbm(5, 0, asdf_width, asdf_height, asdf_bits);  
+}
+
 void drawLines()
 {
   for (int16_t i=0; i<display.getWidth(); i+=4)
